@@ -1,0 +1,3 @@
+<div class="product-index">
+    <app-product-item *ngFor="let product of model" (addToCardEvent)="addToCard($event)" [product]="product" class="product-container"></app-product-item>
+</div>

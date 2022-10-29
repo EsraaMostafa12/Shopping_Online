@@ -1,0 +1,84 @@
+
+<div class="cart-panel cart-container">
+    <div *ngIf="productCartList && productCartList.length!=0" class="row">
+        <div  class="col-lg-6 col-md-6 col-sm-12">
+            <div *ngFor="let productCart of productCartList">
+                <div class="cart-item" >
+                    <div class="img"><img [src]="productCart?.product?.url"></div>
+                    <div class="cart-item-details">
+                        <div style="font-size: 22px;font-weight: bold;">{{productCart?.product?.name}}</div>
+                        <div>{{productCart?.product?.price}} $</div>
+                        <div>Amount: <input type="number" min="0" oninput="validity.valid||(value='');" (ngModelChange)="modelChanged($event,productCart)" class="number-input" [(ngModel)]="productCart.amount"></div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div >
+                <span style="font-size: 30px;font-weight: bold;">Total Price: {{totalPrice}} $</span>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div >
+                <form [formGroup]="dataform" (ngSubmit)="submit()">
+                    <div class="cart-item-details form-margin">
+                        <label for="fullname">Full name<span class="text-danger">*</span></label>
+                        <input placeholder="(minimum 3 characters)" formControlName="fullname" 
+                          name="fullname" type="text" [(ngModel)]="user.fullname">
+                          <div class="alert-danger" *ngIf="submitted && frm['fullname'].errors">
+                            <div *ngIf="frm['fullname'].errors['required']">
+                              <small> Enter Full name </small>
+                            </div>
+                            <div *ngIf="frm['fullname'].errors['minlength']">
+                                <small> you must enter at least 3 characters </small>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="cart-item-details form-margin">
+                        <label for="Address">Address<span class="text-danger">*</span></label>
+                        <input placeholder="(minimum 6 characters)" formControlName="address" 
+                        name="address" type="text" [(ngModel)]="user.address">
+                        <div class="alert-danger" *ngIf="submitted && frm['address'].errors">
+                            <div *ngIf="frm['address'].errors['required']">
+                              <small> Enter Address </small>
+                            </div>
+                            <div *ngIf="frm['address'].errors['minlength']">
+                                <small> you must enter at least 6 characters </small>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="cart-item-details form-margin">
+                        <label for="CreditCardNumber">Credit Card Number<span class="text-danger">*</span></label>
+                        <input placeholder="(16 digit-number)" formControlName="creditCardNumber" 
+                        name="CreditCardNumber" type="text" [(ngModel)]="user.creditCardNumber"> 
+                        <div class="alert-danger" *ngIf="submitted && frm['creditCardNumber'].errors">
+                            <div *ngIf="frm['creditCardNumber'].errors['required']">
+                              <small> Enter Credit Card Number </small>
+                            </div>
+                            <div *ngIf="frm['creditCardNumber'].errors['minlength'] || frm['creditCardNumber'].errors['maxlength']">
+                                <small> you must enter 16 characters </small>
+                              </div>
+                              <div *ngIf="frm['creditCardNumber'].errors['pattern']">
+                                <small> you must enter only number </small>
+                              </div>
+                          </div>   
+                    </div>
+                    <p style="color:gray" class="cart-item-details form-margin">We will never share your payment details with anyone else</p>
+                    <div class="cart-item-details form-margin">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
+    <div *ngIf="!productCartList || productCartList.length==0" class="row empty-cart-message" style="font-size: 30px;font-weight: bold;width: 50%;">
+       <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+      </svg> No Product Found 
+    </div>
+</div>
+
+
+

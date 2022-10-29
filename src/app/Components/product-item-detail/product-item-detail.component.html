@@ -1,0 +1,32 @@
+<div class="detail-container">
+    <div class="row">
+        <div class="col-lg-8 col-md-4 col-sm-12"><img [src]="product?.url" class="img"></div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="detail-item" style=" margin-top: 33%;font-weight: bold;font-size: 70px;">{{product.name}}</div>
+            <div class="detail-item" style="font-size: 20px;margin-left: 5%;">{{product?.price}}$</div>
+            <div style="font-size: 20px; margin-left: 5%;">{{product?.description}}</div>
+            <div class="detail-item select-input" style="margin-left: 5%;">
+                <select [(ngModel)]="amount" class="select-input">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                </select>
+           </div>
+           <div style="margin-left: 5%;">
+                <button class="btn btn-primary" (click)="addToCard()">Add To Cart</button>
+           </div>
+           <div class="back-link" style="font-size: 20px; margin-left: 5%;">
+               <a [routerLink]="['/']">Back To Product List</a>
+           </div>
+        </div>
+       
+    </div>
+    
+</div>
